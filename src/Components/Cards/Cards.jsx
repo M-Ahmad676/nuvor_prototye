@@ -9,7 +9,7 @@ export default function Cards() {
   const {products, loading} = useContext(ProductContext)
   const dispatch = useDispatch()
 
-  const handleAddToCart = (product,e) => {
+  const handleAddToCart = (e,product) => {
     e.stopPropagation()
     e.preventDefault()
     console.log("Adding product to cart:", product); // Debugging Log
@@ -24,16 +24,16 @@ export default function Cards() {
   return (
     <div className='w-full grid grid-cols-4 gap-5 '>
       {products.map((product) => (
-      <Link to={`/Product/${product.id}`} key={product.id} className='block'>
+      <Link to={`/product/${product.id}`} key={product.id} className='block'>
       <div className='border border-gray-400 rounded-2xl shadow-sm shadow-gray-400 cursor-pointer transition-all duration-300 ease-in-out hover:scale-95'>
          <div >
             <img src={product.thumbnail} alt={product.title} /> 
           </div>  
           <div className='h-[9rem] p-5 space-y-3 rounded-b-2xl'>
             <h2 className='text-[1.2rem] font-medium'>{product.title}</h2>
-            <p className='text-gray-500'>{product.price}$</p>
+            <p className='text-gray-500'>${product.price}</p>
             <button className='py-1.5 px-4 bg-gray-900 text-white rounded-md hover:bg-black cursor-pointer'
-            onClick={(e) => handleAddToCart(product,e)}
+            onClick={(e) => handleAddToCart(e,product)}
             >Add to Cart</button>
           </div>
       </div>
